@@ -1,5 +1,5 @@
-current directory: /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/app/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ext/nokogiri
-/Users/suzuki_shogo/.rbenv/versions/2.6.1/bin/ruby -I /Users/suzuki_shogo/.rbenv/versions/2.6.1/lib/ruby/2.6.0 -r ./siteconf20190223-69356-2nt6y.rb extconf.rb --use-system-libraries\ --with-xml2-include\=/usr/local/opt/libxml2/include/libxml2
+current directory: /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ext/nokogiri
+/Users/suzuki_shogo/.rbenv/versions/2.6.1/bin/ruby -I /Users/suzuki_shogo/.rbenv/versions/2.6.1/lib/ruby/site_ruby/2.6.0 -r ./siteconf20190224-29320-hy5tj6.rb extconf.rb --use-system-libraries\ --with-xml2-include\=/usr/local/opt/libxml2/include/libxml2
 checking if the C compiler accepts  -I /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libxml2... yes
 checking if the C compiler accepts -Wno-error=unused-command-line-argument-hard-error-in-future... no
 Building nokogiri using packaged libraries.
@@ -32,11 +32,11 @@ Note, however, that nokogiri is not fully compatible with arbitrary
 versions of libxml2 provided by OS/package vendors.
 ************************************************************************
 Extracting libxml2-2.9.9.tar.gz into tmp/x86_64-apple-darwin17.7.0/ports/libxml2/2.9.9... OK
-Running git apply with /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/app/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/patches/libxml2/0001-Revert-Do-not-URI-escape-in-server-side-includes.patch... OK
+Running git apply with /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/patches/libxml2/0001-Revert-Do-not-URI-escape-in-server-side-includes.patch... OK
 Running 'configure' for libxml2 2.9.9... OK
 Running 'compile' for libxml2 2.9.9... OK
 Running 'install' for libxml2 2.9.9... OK
-Activating libxml2 2.9.9 (from /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/app/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ports/x86_64-apple-darwin17.7.0/libxml2/2.9.9)...
+Activating libxml2 2.9.9 (from /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ports/x86_64-apple-darwin17.7.0/libxml2/2.9.9)...
 ************************************************************************
 IMPORTANT NOTICE:
 
@@ -60,7 +60,7 @@ Extracting libxslt-1.1.33.tar.gz into tmp/x86_64-apple-darwin17.7.0/ports/libxsl
 Running 'configure' for libxslt 1.1.33... OK
 Running 'compile' for libxslt 1.1.33... OK
 Running 'install' for libxslt 1.1.33... OK
-Activating libxslt 1.1.33 (from /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/app/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ports/x86_64-apple-darwin17.7.0/libxslt/1.1.33)...
+Activating libxslt 1.1.33 (from /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ports/x86_64-apple-darwin17.7.0/libxslt/1.1.33)...
 checking for -llzma... yes
 checking for xmlParseDoc() in libxml/parser.h... yes
 checking for xsltParseStylesheetDoc() in libxslt/xslt.h... yes
@@ -74,10 +74,10 @@ checking for xmlSchemaSetValidStructuredErrors()... yes
 checking for xmlSchemaSetParserStructuredErrors()... yes
 creating Makefile
 
-current directory: /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/app/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ext/nokogiri
+current directory: /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ext/nokogiri
 make "DESTDIR=" clean
 
-current directory: /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/app/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ext/nokogiri
+current directory: /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ext/nokogiri
 make "DESTDIR="
 compiling html_document.c
 compiling html_element_description.c
@@ -119,9 +119,9 @@ compiling xml_xpath_context.c
 compiling xslt_stylesheet.c
 linking shared-object nokogiri/nokogiri.bundle
 Cleaning files only used during build.
-rm -rf /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/app/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ext/nokogiri/tmp/x86_64-apple-darwin17.7.0/ports
-rm -rf /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/app/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ports
+rm -rf /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ext/nokogiri/tmp/x86_64-apple-darwin17.7.0/ports
+rm -rf /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ports
 
-current directory: /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/app/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ext/nokogiri
+current directory: /Users/suzuki_shogo/Documents/workspace/gae/gae_react/api/vendor/bundle/ruby/2.6.0/gems/nokogiri-1.10.1/ext/nokogiri
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 nokogiri.bundle ./.gem.20190223-69356-1c5hb9o/nokogiri
+/usr/bin/install -c -m 0755 nokogiri.bundle ./.gem.20190224-29320-1k0tedn/nokogiri

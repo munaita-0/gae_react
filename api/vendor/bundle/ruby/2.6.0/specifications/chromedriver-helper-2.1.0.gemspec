@@ -15,10 +15,10 @@ Gem::Specification.new do |s|
   s.files = ["bin/chromedriver-helper".freeze, "bin/chromedriver-update".freeze]
   s.homepage = "https://github.com/flavorjones/chromedriver-helper".freeze
   s.licenses = ["MIT".freeze]
-  s.rubygems_version = "3.0.1".freeze
+  s.rubygems_version = "3.0.2".freeze
   s.summary = "Easy installation and use of chromedriver.".freeze
 
-  s.installed_by_version = "3.0.1" if s.respond_to? :installed_by_version
+  s.installed_by_version = "3.0.2" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4

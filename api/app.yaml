@@ -1,0 +1,7 @@
+entrypoint: bundle exec rails db:migrate RAILS_ENV=production && bundle exec rails server --port $PORT
+env: flex
+runtime: ruby
+service: suzuki-api
+
+includes:
+- secret.yaml
