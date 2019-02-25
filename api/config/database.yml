@@ -17,7 +17,6 @@ development:
   host: 127.0.0.1
   database: suzuki_test_dev
   username: root
-  # password: 
 
 test:
   <<: *default
@@ -27,11 +26,10 @@ test:
   collation: utf8_general_ci
   encoding: utf8
   username: root
-  # password: root
 
 production:
   <<: *default
   database: suzuki_test
   username: <%= ENV['DB_ID'] %>
-  password: <%= ENV['DB_PASS'] %
-  socket: <%= ENV['DB_SOCKET']
+  password: <%= ENV['DB_PASS'] %>
+  socket: <%= ENV['DB_SOCKET'] %>
