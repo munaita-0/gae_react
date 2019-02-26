@@ -1,8 +1,19 @@
 class MemosController < ApplicationController
   def index
-    if Memo.all.blank?
-      Memo.new(name: 'first', description: 'first_desc').save
-    end
-    render json: {aa: Memo.all}
+    render json: Memo.all
+  end
+
+  def create
+    Memo.new(name: params[:name], description: params[:description]).save
+  end
+
+  def update
+    memo = Memo.find(params[:id])
+    memo.update(name: params[:name], description: params[:description])
+  end
+
+  def destroy
+    memo = Memo.find(params[:id])
+    memo.destroy
   end
 end
