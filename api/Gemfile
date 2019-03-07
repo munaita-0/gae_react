@@ -66,3 +66,5 @@ gem "appengine", "~> 0.4.6"
 gem "mysql2", "~> 0.5.2"
 
 gem "google-protobuf", "3.7.0.rc.2"
+
+gem "rack-cors", "~> 1.0"
