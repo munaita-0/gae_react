@@ -1,4 +1,4 @@
-import fetch from 'cross-fetch'
+import axios from 'axios'
 
 export const REQUEST_MEMOS = 'REQUEST_MEMOS'
 export const RECEIVE_MEMOS = 'RECEIVE_MEMOS'
@@ -25,9 +25,6 @@ export function requestMemos() {
 }
 
 export function receiveMemos(json) {
-  console.log('======')
-  console.log(json.map(v => {return v}))
-  console.log('======')
   return {
     type: RECEIVE_MEMOS,
     memos: json.map(v => {return v}),
@@ -40,9 +37,8 @@ export function fetchMemos() {
     dispatch(requestMemos())
     // console.log(fetch(`http://localhost:3000/memos`))
     // return fetch(`http://localhost:3000/memos`)
-    return fetch(`https://suzuki-api-dot-spinapptest-151310.appspot.com/memos`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveMemos(json)))
+    return axios.get(`https://suzuki-api-dot-spinapptest-151310.appspot.com/memos`)
+      .then(response => dispatch(receiveMemos(response.data)))
   }
 }
 
@@ -50,13 +46,16 @@ export function createMemo(memo) {
   console.log('in createMemos')
   return dispatch => {
     dispatch(requestMemos())
+    console.log('======')
     // 1. POSTの処理書く
 
     // console.log(fetch(`http://localhost:3000/memos`))
     // return fetch(`http://localhost:3000/memos`)
-    // return fetch(`https://suzuki-api-dot-spinapptest-151310.appspot.com/memos`)
-    //   .then(response => response.json())
-    //   .then(json => dispatch(receiveMemos(json)))
+    return axios.post(`https://suzuki-api-dot-spinapptest-151310.appspot.com/memos`, {
+      name: memo.name,
+      description: memo.description
+    }).then(response => {console.log(response)})
+      // .then(json => dispatch(receiveMemos(json)))
   }
 }
 
