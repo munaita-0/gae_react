@@ -3,10 +3,14 @@ import PropTypes from 'prop-types'
 
 export default class Memos extends Component {
   render() {
+    const { memos, handleDelete } = this.props
     return (
       <ul>
-        {this.props.memos.map((memo, i) => (
-          <li key={i}>{memo.name}::{memo.description}</li>
+        {memos.map((memo, i) => (
+          <li key={memo.id}>
+            {memo.id}::{memo.name}::{memo.description}
+            <button onClick={() => handleDelete(memo)}>delete</button>
+          </li>
         ))}
       </ul>
     )
@@ -14,5 +18,6 @@ export default class Memos extends Component {
 }
 
 Memos.propTypes = {
-  memos: PropTypes.array.isRequired
+  memos: PropTypes.array.isRequired,
+  handleDelete: PropTypes.func
 }
