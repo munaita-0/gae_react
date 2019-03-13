@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from './components/History'
 
 export const REQUEST_MEMOS = 'REQUEST_MEMOS'
 export const RECEIVE_MEMOS = 'RECEIVE_MEMOS'
@@ -35,7 +36,7 @@ export function createMemo(memo) {
       name: memo.name,
       description: memo.description
     }).then(response => {
-      dispatch(fetchMemos())
+      console.log('ddddd')
     })
   }
 }
