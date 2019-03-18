@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import {
   createMemo,
 } from '../actions'
+import { Form, Input, Button, } from 'antd'
+import 'antd/dist/antd.css'
 
 class CreateMemo extends Component {
   constructor(props) {
@@ -36,15 +38,17 @@ class CreateMemo extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" name="name" value={this.state.name} onChange={this.handleChangeName} />
-            Description:
-            <input type="text" name="description" value={this.state.description} onChange={this.handleChangeDescription}/>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Item label="Name">
+            <Input name="name" value={this.state.name} onChange={this.handleChangeName} />
+          </Form.Item>
+          <Form.Item label="description">
+            <Input name="description" value={this.state.description} onChange={this.handleChangeDescription}/>
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" >Create</Button>
+          </Form.Item>
+        </Form>
       </div>
     )
   }

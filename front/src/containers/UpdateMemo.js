@@ -5,6 +5,8 @@ import {
   updateMemo,
   fetchMemo,
 } from '../actions'
+import { Form, Input, Button, } from 'antd'
+import 'antd/dist/antd.css'
 
 class UpdateMemo extends Component {
   constructor(props) {
@@ -54,17 +56,17 @@ class UpdateMemo extends Component {
 
     return (
       <div>
-        {isFetching && !updatingMemo && <h2>Loading...</h2>}
-        {!isFetching && updatingMemo.name && <h2>Enpty.</h2>}
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" name="name" value={this.state.name} onChange={this.handleChangeName} />
-            Description:
-            <input type="text" name="description" value={this.state.description} onChange={this.handleChangeDescription}/>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Item label="Name">
+            <Input name="name" value={this.state.name} onChange={this.handleChangeName} />
+          </Form.Item>
+          <Form.Item label="description">
+            <Input name="description" value={this.state.description} onChange={this.handleChangeDescription}/>
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" >Create</Button>
+          </Form.Item>
+        </Form>
       </div>
     )
   }

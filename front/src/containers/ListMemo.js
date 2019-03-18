@@ -6,6 +6,9 @@ import {
   deleteMemo,
 } from '../actions'
 import Memos from '../components/Memos'
+import { Button } from 'antd'
+import 'antd/dist/antd.css'
+import { NavLink } from 'react-router-dom'
 
 class ListMemo extends Component {
   constructor(props) {
@@ -40,6 +43,7 @@ class ListMemo extends Component {
 
     return (
       <div>
+        <Button type="primary"><NavLink to='/create'>Create</NavLink></Button>
         {isFetching && memos.length === 0 && <h2>Loading...</h2>}
         {!isFetching && memos.length === 0 && <h2>Enpty.</h2>}
         {memos.length > 0 && (

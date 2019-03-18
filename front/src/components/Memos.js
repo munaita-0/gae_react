@@ -13,7 +13,7 @@ export default class Memos extends Component {
       id: memo.id.toString(),
       name: memo.name,
       description: memo.description,
-      edit: <NavLink to={`update/${memo.id}`}>Update</NavLink>,
+      edit: <Button type="primary"><NavLink to={`update/${memo.id}`}>Update</NavLink></Button>,
       delete: <Button type="primary" onClick={() => handleDelete(memo)}>delete</Button>
     }))
 
