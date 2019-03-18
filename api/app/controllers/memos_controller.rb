@@ -3,6 +3,10 @@ class MemosController < ApplicationController
     render json: Memo.all
   end
 
+  def show
+    render json: Memo.find(params[:id])
+  end
+
   def create
     Memo.new(name: params[:name], description: params[:description]).save
   end

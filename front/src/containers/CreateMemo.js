@@ -52,7 +52,6 @@ class CreateMemo extends Component {
 
 CreateMemo.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  // handleSubmit: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {

@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
 import {
   REQUEST_MEMOS,
-  RECEIVE_MEMOS
+  RECEIVE_MEMOS,
+  RECEIVE_UPDATING_MEMO
 } from './actions'
 
 function memos(state = {}, action) {
@@ -24,9 +25,19 @@ function isFetching(state = {}, action) {
   }
 }
 
+function updatingMemo(state = {}, action) {
+  switch (action.type) {
+    case RECEIVE_UPDATING_MEMO:
+      return action.updatingMemo
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   memos,
-  isFetching
+  isFetching,
+  updatingMemo
 })
 
 export default rootReducer

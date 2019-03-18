@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
-  fetchMemos,
-  createMemo,
-  deleteMemo,
+  updateMemo,
+  fetchMemo,
 } from '../actions'
-import Memos from '../components/Memos'
 
 class UpdateMemo extends Component {
   constructor(props) {
-    super(props) this.state = { name: '',
+    super(props)
+    this.state = {
+      name: '',
       description: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,17 +26,36 @@ class UpdateMemo extends Component {
     this.setState({description: e.target.value});
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(fetchMemo(this.props.match.params.id))
+  }
+
+  componentDidUpdate(prevProps) {
+    const { updatingMemo } = this.props
+    if (prevProps.updatingMemo.name !== updatingMemo.name) {
+      this.setState({
+        name: updatingMemo.name,
+        description: updatingMemo.description
+      })
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    const { dispatch } = this.props
-    dispatch(createMemo(this.state))
+    const { dispatch, updatingMemo } = this.props
+    dispatch(updateMemo(updatingMemo.id, this.state)).then(e => {
+      this.props.history.push('/')
+    })
   }
 
   render() {
-    // const { memos, isFetching } = this.props
+    const { updatingMemo, isFetching } = this.props
 
     return (
       <div>
+        {isFetching && !updatingMemo && <h2>Loading...</h2>}
+        {!isFetching && updatingMemo.name && <h2>Enpty.</h2>}
         <form onSubmit={this.handleSubmit}>
           <label>
             Name:
@@ -51,19 +70,17 @@ class UpdateMemo extends Component {
   }
 }
 
-CreateMemo.propTypes = {
+UpdateMemo.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  // handleSubmit: PropTypes.func.isRequired,
 }
 
 function mapStateToProps(state) {
-  // let { isFetching, memos } = state || { isFetching: true, memos: [] }
-  // memos = !memos ? [] : memos
-  //
-  // return {
-  //   memos,
-  //   isFetching,
-  // }
+  let { isFetching, updatingMemo } = state || { isFetching: true, updatingMemo: {} }
+  
+  return {
+    updatingMemo,
+    isFetching,
+  }
 }
 
 export default connect(mapStateToProps) (UpdateMemo)

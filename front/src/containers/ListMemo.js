@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
-  fetchMemos,
+  fetchListMemos,
   deleteMemo,
 } from '../actions'
 import Memos from '../components/Memos'
@@ -18,9 +18,8 @@ class ListMemo extends Component {
   }
 
   componentDidMount() {
-    console.log('in didmount')
     const { dispatch } = this.props
-    dispatch(fetchMemos())
+    dispatch(fetchListMemos())
   }
 
   handleChangeName(e) {
@@ -38,7 +37,6 @@ class ListMemo extends Component {
 
   render() {
     const { memos, isFetching } = this.props
-    console.log('=====render========')
 
     return (
       <div>
