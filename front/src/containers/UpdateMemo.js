@@ -52,8 +52,6 @@ class UpdateMemo extends Component {
   }
 
   render() {
-    const { updatingMemo, isFetching } = this.props
-
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>

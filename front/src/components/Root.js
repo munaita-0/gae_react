@@ -3,23 +3,23 @@ import { Provider } from 'react-redux'
 import ListMemo from '../containers/ListMemo'
 import CreateMemo from '../containers/CreateMemo'
 import UpdateMemo from '../containers/UpdateMemo'
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './History'
-import { Layout, Menu, Breadcrumb } from 'antd'
+import { Layout, Menu } from 'antd'
 import 'antd/dist/antd.css'
 
 const { Header, Content, Footer } = Layout;
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <Router history={history}>
+    <BrowserRouter history={history}>
       <Layout className="layout">
       <Header>
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectKeys={['2']}
+          defaultSelectedKeys={['1']}
           style={{ lineHight: '64x'}}
         >
           <Menu.Item key='1'><NavLink to='/'>Home</NavLink></Menu.Item>
@@ -36,7 +36,7 @@ const Root = ({ store }) => (
         prototyping by Shogo Suzuki
       </Footer>
       </Layout>
-    </Router>
+    </BrowserRouter>
   </Provider>
 )
 

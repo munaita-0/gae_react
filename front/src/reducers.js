@@ -4,8 +4,9 @@ import {
   RECEIVE_MEMOS,
   RECEIVE_UPDATING_MEMO
 } from './actions'
+import { reducer as formReducer } from 'redux-form'
 
-function memos(state = {}, action) {
+function memos(state = [], action) {
   switch (action.type) {
     case RECEIVE_MEMOS:
       return action.memos
@@ -14,7 +15,7 @@ function memos(state = {}, action) {
   }
 }
 
-function isFetching(state = {}, action) {
+function isFetching(state = false, action) {
   switch (action.type) {
     case REQUEST_MEMOS:
       return true
@@ -37,7 +38,8 @@ function updatingMemo(state = {}, action) {
 const rootReducer = combineReducers({
   memos,
   isFetching,
-  updatingMemo
+  updatingMemo,
+  form: formReducer
 })
 
 export default rootReducer
