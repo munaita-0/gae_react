@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
   createMemo,
@@ -14,9 +13,9 @@ class CreateMemo extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    const { dispatch, memoFormValues } = this.props
-    dispatch(createMemo(memoFormValues)).then(e => {
+    console.log(e)
+    const { dispatch } = this.props
+    dispatch(createMemo(e)).then(e => {
       this.props.history.push('/')
     })
   }
@@ -24,24 +23,10 @@ class CreateMemo extends Component {
   render() {
     return (
       <div>
-        <MemoForm handleSubmit={this.handleSubmit} />
+        <MemoForm onSubmit={this.handleSubmit} />
       </div>
     )
   }
 }
 
-CreateMemo.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  memoFormValues: PropTypes.object.isRequired
-}
-
-function mapStateToProps(state) {
-  let { form: { memo: memoForm } } = state
-  memoForm = !memoForm ? {} : memoForm
-  
-  return {
-    memoFormValues: memoForm.values || {}
-  }
-}
-
-export default connect(mapStateToProps) (CreateMemo)
+export default connect() (CreateMemo)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { Form, Input, Button, } from 'antd'
+import { Form, Button, } from 'antd'
 
 let MemoForm = props => {
   const { handleSubmit } = props
@@ -18,7 +18,6 @@ let MemoForm = props => {
 }
 
 MemoForm = reduxForm({
-  // a unique name for the form
   form: 'memo'
 })(MemoForm)
 
