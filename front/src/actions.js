@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {Configs} from './config'
 
 export const REQUEST_MEMOS = 'REQUEST_MEMOS'
 export const RECEIVE_MEMOS = 'RECEIVE_MEMOS'
@@ -26,8 +27,7 @@ export function receiveUpdatingMemo(json) {
 export function fetchMemo(id) {
   return dispatch => {
     dispatch(requestMemos())
-    // return fetch(`http://localhost:3000/memos`)
-    return axios.get(`https://suzuki-api-dot-spinapptest-151310.appspot.com/memos/${id}`)
+    return axios.get(`${Configs.host}/memos/${id}`)
       .then(response => dispatch(receiveUpdatingMemo(response.data)))
   }
 }
@@ -35,8 +35,7 @@ export function fetchMemo(id) {
 export function fetchListMemos() {
   return dispatch => {
     dispatch(requestMemos())
-    // return fetch(`http://localhost:3000/memos`)
-    return axios.get(`https://suzuki-api-dot-spinapptest-151310.appspot.com/memos`)
+    return axios.get(`${Configs.host}/memos`)
       .then(response => dispatch(receiveMemos(response.data)))
   }
 }
@@ -45,8 +44,7 @@ export function createMemo(memo) {
   return dispatch => {
     dispatch(requestMemos())
 
-    // return fetch(`http://localhost:3000/memos`)
-    return axios.post(`https://suzuki-api-dot-spinapptest-151310.appspot.com/memos`, {
+    return axios.post(`${Configs.host}/memos`, {
       name: memo.name,
       description: memo.description
     }).then(response => {
@@ -59,8 +57,7 @@ export function updateMemo(id, memo) {
   return dispatch => {
     dispatch(requestMemos())
 
-    // return fetch(`http://localhost:3000/memos`)
-    return axios.put(`https://suzuki-api-dot-spinapptest-151310.appspot.com/memos/${id}`, {
+    return axios.put(`${Configs.host}/memos/${id}`, {
       name: memo.name,
       description: memo.description
     }).then(response => {
@@ -74,8 +71,7 @@ export function deleteMemo(id) {
   return dispatch => {
     dispatch(requestMemos())
 
-    // return fetch(`http://localhost:3000/memos`)
-    return axios.delete(`https://suzuki-api-dot-spinapptest-151310.appspot.com/memos/${id}`)
+    return axios.delete(`${Configs.host}/memos/${id}`)
       .then(response => {
         dispatch(fetchListMemos())
       })
