@@ -70,3 +70,7 @@ gem "google-protobuf", "3.7.0.rc.2"
 gem "rack-cors", "~> 1.0"
 
 gem "sendgrid-ruby", "~> 5.3"
+
+gem "devise", "~> 4.6"
+
+gem "devise_token_auth", "~> 1.1"
