@@ -3,6 +3,9 @@ import { Provider } from 'react-redux'
 import ListMemo from '../containers/ListMemo'
 import CreateMemo from '../containers/CreateMemo'
 import UpdateMemo from '../containers/UpdateMemo'
+import CreateUser from '../containers/CreateUser'
+import EditUser from '../containers/EditUser'
+import Login from '../containers/Login'
 import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './History'
@@ -23,6 +26,9 @@ const Root = ({ store }) => (
           style={{ lineHight: '64x'}}
         >
           <Menu.Item key='1'><NavLink to='/'>Home</NavLink></Menu.Item>
+          <Menu.Item key='2'><NavLink to='/sign_up'>Sign up</NavLink></Menu.Item>
+          <Menu.Item key='3'><NavLink to='/log_in'>Log in</NavLink></Menu.Item>
+          <Menu.Item key='4'><NavLink to='/account'>Account</NavLink></Menu.Item>
         </Menu>
       </Header>
       <Content style={{ padding: '0 50px'}}>
@@ -30,6 +36,9 @@ const Root = ({ store }) => (
         <Route exact path="/" component={ListMemo} />
         <Route path="/create" component={CreateMemo} />
         <Route path="/update/:id" component={UpdateMemo} />
+        <Route path="/sign_up" component={CreateUser} />
+        <Route path="/log_in" component={Login} />
+        <Route path="/account" component={EditUser} />
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
