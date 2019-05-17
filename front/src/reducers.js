@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux'
 import {
-  REQUEST_MEMOS,
-  RECEIVE_MEMOS,
-  RECEIVE_UPDATING_MEMO,
-  RECEIVE_LOGIN
-} from './actions'
+  memoActions,
+  userActions
+} from './actions/index'
+
+
 import { reducer as formReducer } from 'redux-form'
 
 function memos(state = [], action) {
   switch (action.type) {
-    case RECEIVE_MEMOS:
+    case 'RECEIVE_MEMOS':
       return action.memos
     default:
       return state
@@ -18,9 +18,9 @@ function memos(state = [], action) {
 
 function isFetching(state = false, action) {
   switch (action.type) {
-    case REQUEST_MEMOS:
+    case 'REQUEST_MEMOS':
       return true
-    case RECEIVE_MEMOS:
+    case 'RECEIVE_MEMOS':
       return false
     default:
       return state
@@ -29,7 +29,7 @@ function isFetching(state = false, action) {
 
 function updatingMemo(state = {}, action) {
   switch (action.type) {
-    case RECEIVE_UPDATING_MEMO:
+    case 'RECEIVE_UPDATING_MEMO':
       return action.updatingMemo
     default:
       return state
@@ -38,7 +38,7 @@ function updatingMemo(state = {}, action) {
 
 function auth(state = {}, action) {
   switch (action.type) {
-    case RECEIVE_LOGIN:
+    case userActions.RECEIVE_LOGIN:
       document.cookie = `uid=${action.auth.uid}`
       document.cookie = `client=${action.auth.client}`
       document.cookie = `access-token=${action.auth['access-token']}`

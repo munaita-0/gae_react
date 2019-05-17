@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import {
   editUser,
   fetchUser,
-} from '../actions'
+} from '../actions/index'
 import 'antd/dist/antd.css'
 import UserForm from '../components/UserForm'
 

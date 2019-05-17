@@ -1,10 +1,6 @@
+import {Configs} from '../config'
+import {Cookie} from '../cookie'
 import axios from 'axios'
-import {Configs} from './config'
-import {Cookie} from './cookie'
-
-export const REQUEST_MEMOS = 'REQUEST_MEMOS'
-export const RECEIVE_MEMOS = 'RECEIVE_MEMOS'
-export const RECEIVE_UPDATING_MEMO = 'RECEIVE_UPDATING_MEMO'
 
 export const REQUEST_USER = 'REQUEST_MEMOS'
 export const RECEIVE_USER = 'RECEIVE_MEMOS'
@@ -16,87 +12,9 @@ export const RECEIVE_LOGIN = 'RECEIVE_LOGIN'
 export const REQUEST_LOGOUT = 'REQUEST_LOGOUT'
 export const RECEIVE_LOGOUT = 'RECEIVE_LOGOUT'
 
-export function requestMemos() {
-  console.log('in requestMemos')
-  return { type: REQUEST_MEMOS }
-}
-
-export function receiveMemos(json) {
-  return {
-    type: RECEIVE_MEMOS,
-    memos: json.map(v => {return v}),
-  }
-}
-
-export function receiveUpdatingMemo(json) {
-  return { type: RECEIVE_UPDATING_MEMO,
-    updatingMemo: json,
-  }
-}
-
-export function fetchMemo(id) {
-  return dispatch => {
-    dispatch(requestMemos())
-    return axios.get(`${Configs.host}/memos/${id}`)
-      .then(response => dispatch(receiveUpdatingMemo(response.data)))
-  }
-}
-
-export function fetchListMemos() {
-  // TODO cookie -> headerはメソッド化する
-  const cookie = Cookie()
-
-  return dispatch => {
-    dispatch(requestMemos())
-    return axios.get(
-      `${Configs.host}/memos`,
-      { 
-        headers: {
-          uid: cookie['uid'],
-          client: cookie['client'],
-          'access-token': cookie['access-token'],
-        }
-      }
-    ).then(response => dispatch(receiveMemos(response.data)))
-  }
-}
-
-export function createMemo(memo) {
-  return dispatch => {
-    dispatch(requestMemos())
-
-    return axios.post(`${Configs.host}/memos`, {
-      name: memo.name,
-      description: memo.description
-    }).then(response => {
-      console.log('ddddd')
-    })
-  }
-}
-
-export function updateMemo(id, memo) {
-  return dispatch => {
-    dispatch(requestMemos())
-
-    return axios.put(`${Configs.host}/memos/${id}`, {
-      name: memo.name,
-      description: memo.description
-    }).then(response => {
-      console.log('ddddd')
-    })
-  }
-}
-
-export function deleteMemo(id) {
-  console.log('in deleteMemos')
-  return dispatch => {
-    dispatch(requestMemos())
-
-    return axios.delete(`${Configs.host}/memos/${id}`)
-      .then(response => {
-        dispatch(fetchListMemos())
-      })
-  }
+export const userActions = {
+  RECEIVE_LOGIN,
+  REQUEST_LOGIN
 }
 
 export function requestUser() {

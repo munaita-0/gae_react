@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import {
   fetchListMemos,
   deleteMemo,
-} from '../actions'
+} from '../actions/index'
 import Memos from '../components/Memos'
 import { Button } from 'antd'
 import 'antd/dist/antd.css'

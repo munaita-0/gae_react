@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   login
-} from '../actions'
+} from '../actions/index'
 import 'antd/dist/antd.css'
 import LoginForm from '../components/LoginForm'
 

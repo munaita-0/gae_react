@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  createMemo,
-} from '../actions'
+  memoActions,
+} from '../actions/index'
 import 'antd/dist/antd.css'
 import MemoForm from '../components/MemoForm'
 
@@ -13,9 +13,8 @@ class CreateMemo extends Component {
   }
 
   handleSubmit(e) {
-    console.log(e)
     const { dispatch } = this.props
-    dispatch(createMemo(e)).then(e => {
+    dispatch(memoActions.createMemo(e)).then(e => {
       this.props.history.push('/')
     })
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   logout
-} from '../actions'
+} from '../actions/index'
 import 'antd/dist/antd.css'
 import LogoutForm from '../components/LogoutForm'
 

@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {
-  fetchListMemos,
-  deleteMemo,
-} from '../actions'
+import { memoActions } from '../actions/index'
 import Memos from '../components/Memos'
 import { Button } from 'antd'
 import 'antd/dist/antd.css'
@@ -22,7 +19,14 @@ class ListMemo extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(fetchListMemos())
+    dispatch(memoActions.fetchListMemos())
+      .catch((err) => {
+        if (err.response.status === 401) {
+          this.props.history.push('/log_in')
+        } else {
+          // TODO 例外処理
+        }
+      })
   }
 
   handleChangeName(e) {
@@ -35,7 +39,14 @@ class ListMemo extends Component {
 
   handleDelete(e) {
     const { dispatch } = this.props
-    dispatch(deleteMemo(e.id))
+    dispatch(memoActions.deleteMemo(e.id))
+      .catch((err) => {
+        if (err.response.status === 401) {
+          this.props.history.push('/log_in')
+        } else {
+          // TODO 例外処理
+        }
+      })
   }
 
   render() {
