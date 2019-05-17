@@ -13,6 +13,9 @@ export const RECEIVE_EDITING_USER = 'RECEIVE_EDITING_USER'
 export const REQUEST_LOGIN = 'REQUEST_LOGIN'
 export const RECEIVE_LOGIN = 'RECEIVE_LOGIN'
 
+export const REQUEST_LOGOUT = 'REQUEST_LOGOUT'
+export const RECEIVE_LOGOUT = 'RECEIVE_LOGOUT'
+
 export function requestMemos() {
   console.log('in requestMemos')
   return { type: REQUEST_MEMOS }
@@ -40,10 +43,21 @@ export function fetchMemo(id) {
 }
 
 export function fetchListMemos() {
+  // TODO cookie -> headerはメソッド化する
+  const cookie = Cookie()
+
   return dispatch => {
     dispatch(requestMemos())
-    return axios.get(`${Configs.host}/memos`)
-      .then(response => dispatch(receiveMemos(response.data)))
+    return axios.get(
+      `${Configs.host}/memos`,
+      { 
+        headers: {
+          uid: cookie['uid'],
+          client: cookie['client'],
+          'access-token': cookie['access-token'],
+        }
+      }
+    ).then(response => dispatch(receiveMemos(response.data)))
   }
 }
 
@@ -162,5 +176,40 @@ export function login(idpass) {
       email: idpass.email,
       password: idpass.password,
     }).then(response => dispatch(receiveLogin(response.headers)))
+  }
+}
+
+export function requestLogout() {
+  return { type: REQUEST_LOGOUT }
+}
+
+export function receiveLogout(json) {
+  return {
+    type: RECEIVE_LOGOUT,
+    auth: json,
+  }
+}
+
+export function logout(idpass) {
+  return dispatch => {
+    dispatch(requestLogout())
+
+    const cookie = Cookie()
+
+    return axios.delete(
+      `${Configs.host}/auth/sign_out`, 
+      {
+        headers: {
+          uid: cookie['uid'],
+          client: cookie['client'],
+          'access-token': cookie['access-token'],
+        }
+      }
+    ).then(response => dispatch(function(e){
+      document.cookie = `uid=`
+      document.cookie = `client=`
+      document.cookie = `access-token=`
+      console.log(e)
+    }))
   }
 }

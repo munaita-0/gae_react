@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  login
+  logout
 } from '../actions'
 import 'antd/dist/antd.css'
-import LoginForm from '../components/LoginForm'
+import LogoutForm from '../components/LogoutForm'
 
-class Login extends Component {
+class Logout extends Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,7 +15,7 @@ class Login extends Component {
   handleSubmit(e) {
     console.log(e)
     const { dispatch } = this.props
-    dispatch(login(e)).then(e => {
+    dispatch(logout(e)).then(e => {
       this.props.history.push('/')
       // header周りの情報更新のためログインあとにreloadする
       window.location.reload()
@@ -25,10 +25,10 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <LoginForm onSubmit={this.handleSubmit} />
+        <LogoutForm onSubmit={this.handleSubmit} />
       </div>
     )
   }
 }
 
-export default connect() (Login)
+export default connect() (Logout)

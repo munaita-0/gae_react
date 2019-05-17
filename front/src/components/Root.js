@@ -6,6 +6,8 @@ import UpdateMemo from '../containers/UpdateMemo'
 import CreateUser from '../containers/CreateUser'
 import EditUser from '../containers/EditUser'
 import Login from '../containers/Login'
+import Logout from '../containers/Logout'
+import LoginMenu from '../components/LoginMenu'
 import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './History'
@@ -29,6 +31,8 @@ const Root = ({ store }) => (
           <Menu.Item key='2'><NavLink to='/sign_up'>Sign up</NavLink></Menu.Item>
           <Menu.Item key='3'><NavLink to='/log_in'>Log in</NavLink></Menu.Item>
           <Menu.Item key='4'><NavLink to='/account'>Account</NavLink></Menu.Item>
+          <Menu.Item key='5'><NavLink to='/sign_out'>Sign out</NavLink></Menu.Item>
+          <Menu.Item key='6'><LoginMenu /></Menu.Item>
         </Menu>
       </Header>
       <Content style={{ padding: '0 50px'}}>
@@ -39,6 +43,7 @@ const Root = ({ store }) => (
         <Route path="/sign_up" component={CreateUser} />
         <Route path="/log_in" component={Login} />
         <Route path="/account" component={EditUser} />
+        <Route path="/sign_out" component={Logout} />
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
