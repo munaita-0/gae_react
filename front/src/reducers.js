@@ -1,10 +1,4 @@
 import { combineReducers } from 'redux'
-import {
-  memoActions,
-  userActions
-} from './actions/index'
-
-
 import { reducer as formReducer } from 'redux-form'
 
 function memos(state = [], action) {
@@ -38,11 +32,11 @@ function updatingMemo(state = {}, action) {
 
 function auth(state = {}, action) {
   switch (action.type) {
-    case userActions.RECEIVE_LOGIN:
+    case 'RECEIVE_LOGIN':
       document.cookie = `uid=${action.auth.uid}`
       document.cookie = `client=${action.auth.client}`
       document.cookie = `access-token=${action.auth['access-token']}`
-      return action.auth
+      return {}
     default:
       return state
   }

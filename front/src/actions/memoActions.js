@@ -2,9 +2,6 @@
 import {Configs} from '../config'
 import {Cookie} from '../cookie'
 import axios from 'axios'
-import {memoService} from '../services/memoService'
-
-export const RECEIVE_UPDATING_MEMO = 'RECEIVE_UPDATING_MEMO'
 
 export const memoActions = {
   fetchListMemos,
@@ -13,10 +10,6 @@ export const memoActions = {
   fetchMemo,
   updateMemo,
   createMemo
-}
-
-export function requestMemos() {
-  return { type: 'REQUEST_MEMOS' }
 }
 
 export function receiveMemos(json) {
@@ -28,17 +21,25 @@ export function receiveMemos(json) {
 
 export function fetchListMemos() {
   return dispatch => {
-    return memoService.get(`${Configs.host}/memos`)
+    return axios.get(`${Configs.host}/memos`, Cookie.getHeaders())
       .then(response => dispatch(receiveMemos(response.data)))
-      .catch((err) => { return err })
+      .catch((err) => {
+        console.log("Error in response");
+        console.log(err.response.status);
+        throw err;
+      })
   }
 }
 
 export function deleteMemo(id) {
   return dispatch => {
-    return memoService.destroy(`${Configs.host}/memos/${id}`)
+    return axios.delete(`${Configs.host}/memos/${id}`, Cookie.getHeaders())
       .then(response => { dispatch(fetchListMemos()) })
-      .catch(err => { return err })
+      .catch((err) => {
+        console.log("Error in response");
+        console.log(err.response.status);
+        throw err;
+      })
   }
 }
 
@@ -51,27 +52,43 @@ export function receiveUpdatingMemo(json) {
 
 export function fetchMemo(id) {
   return dispatch => {
-    return memoService.get(`${Configs.host}/memos/${id}`)
+    return axios.get(`${Configs.host}/memos/${id}`, Cookie.getHeaders())
       .then(response => dispatch(receiveUpdatingMemo(response.data)))
-      .catch(err => { return err })
+      .catch((err) => {
+        console.log("Error in response");
+        console.log(err.response.status);
+        throw err;
+      })
   }
 }
 
 export function updateMemo(id, memo) {
   return dispatch => {
-    return memoService.update(
+    return axios.put(
       `${Configs.host}/memos/${id}`,
-      memo
-    )
-    .catch(err => { return err })
+      memo,
+      Cookie.getHeaders()
+    ).catch((err) => {
+      console.log("Error in response");
+      console.log(err.response.status);
+      throw err;
+    })
   }
 }
 
 export function createMemo(memo) {
   return dispatch => {
-    return memoService.create(`${Configs.host}/memos`, {
-      name: memo.name,
-      description: memo.description
-    }).catch(err => { return err })
+    return axios.post(
+      `${Configs.host}/memos`,
+      {
+        name: memo.name,
+        description: memo.description
+      },
+      Cookie.getHeaders()
+    ).catch((err) => {
+      console.log("Error in response");
+      console.log(err.response.status);
+      throw err;
+    })
   }
 }

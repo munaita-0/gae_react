@@ -15,13 +15,13 @@ class EditUser extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, auth } = this.props
-    dispatch(fetchUser(auth))
+    const { dispatch } = this.props
+    dispatch(fetchUser())
   }
 
   handleSubmit(e) {
-    const { dispatch, editingUser, auth } = this.props
-    dispatch(editUser(e, auth)).then(e => {
+    const { dispatch } = this.props
+    dispatch(editUser(e)).then(e => {
       this.props.history.push('/')
     })
   }

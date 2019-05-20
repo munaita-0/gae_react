@@ -13,9 +13,8 @@ class Logout extends Component {
   }
 
   handleSubmit(e) {
-    console.log(e)
     const { dispatch } = this.props
-    dispatch(logout(e)).then(e => {
+    dispatch(logout()).then(e => {
       this.props.history.push('/')
       // header周りの情報更新のためログインあとにreloadする
       window.location.reload()

@@ -5,6 +5,7 @@ import {
 } from '../actions/index'
 import 'antd/dist/antd.css'
 import UserForm from '../components/UserForm'
+import { message } from 'antd';
 
 class CreateUser extends Component {
   constructor(props) {
@@ -13,11 +14,10 @@ class CreateUser extends Component {
   }
 
   handleSubmit(e) {
-    console.log(e)
     const { dispatch } = this.props
-    dispatch(createUser(e)).then(e => {
-      this.props.history.push('/')
-    })
+    dispatch(createUser(e))
+      .then(e => { this.props.history.push('/') })
+      .catch(e => { message.error(e) })
   }
 
   render() {
