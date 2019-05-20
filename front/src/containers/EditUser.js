@@ -7,6 +7,8 @@ import {
 } from '../actions/index'
 import 'antd/dist/antd.css'
 import UserForm from '../components/UserForm'
+import { Typography } from 'antd'
+const { Title } = Typography
 
 class EditUser extends Component {
   constructor(props) {
@@ -16,7 +18,14 @@ class EditUser extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(fetchUser())
+    dispatch(fetchUser(this.props.match.params.id))
+      .catch((err) => {
+        if (err.response.status === 401) {
+          this.props.history.push('/log_in')
+        } else {
+          // TODO 例外処理
+        }
+      })
   }
 
   handleSubmit(e) {
@@ -28,9 +37,10 @@ class EditUser extends Component {
 
   render() {
     const { editingUser } = this.props
-    
+
     return (
       <div>
+        <Title>EDIT USER</Title>
         <UserForm
           onSubmit={this.handleSubmit}
           initialValues={editingUser}
@@ -43,16 +53,14 @@ class EditUser extends Component {
 EditUser.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   editingUser: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
-  let { isFetching, editingUser, auth } = state || { isFetching: true, editingUser: {} }
+  let { isFetching, editingUser } = state || { isFetching: true, editingUser: {} }
 
   return {
     editingUser,
     isFetching,
-    auth
   }
 }
 

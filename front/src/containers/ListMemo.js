@@ -6,14 +6,12 @@ import Memos from '../components/Memos'
 import { Button } from 'antd'
 import 'antd/dist/antd.css'
 import { NavLink } from 'react-router-dom'
+import { Typography } from 'antd'
+const { Title } = Typography
 
 class ListMemo extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      name: '',
-      description: ''
-    }
     this.handleDelete = this.handleDelete.bind(this);
   }
 
@@ -24,17 +22,10 @@ class ListMemo extends Component {
         if (err.response.status === 401) {
           this.props.history.push('/log_in')
         } else {
-          // TODO 例外処理
+          console.log(err)
+          throw err
         }
       })
-  }
-
-  handleChangeName(e) {
-    this.setState({name: e.target.value});
-  }
-
-  handleChangeDescription(e) {
-    this.setState({description: e.target.value});
   }
 
   handleDelete(e) {
@@ -44,7 +35,8 @@ class ListMemo extends Component {
         if (err.response.status === 401) {
           this.props.history.push('/log_in')
         } else {
-          // TODO 例外処理
+          console.log(err)
+          throw err
         }
       })
   }
@@ -54,6 +46,7 @@ class ListMemo extends Component {
 
     return (
       <div>
+        <Title>MEMO LIST</Title>
         <Button type="primary"><NavLink to='/create'>Create</NavLink></Button>
         {isFetching && memos.length === 0 && <h2>Loading...</h2>}
         {!isFetching && memos.length === 0 && <h2>Enpty.</h2>}

@@ -30,13 +30,19 @@ function updatingMemo(state = {}, action) {
   }
 }
 
-function auth(state = {}, action) {
+function users(state = [], action) {
   switch (action.type) {
-    case 'RECEIVE_LOGIN':
-      document.cookie = `uid=${action.auth.uid}`
-      document.cookie = `client=${action.auth.client}`
-      document.cookie = `access-token=${action.auth['access-token']}`
-      return {}
+    case 'RECEIVE_USERS':
+      return action.users
+    default:
+      return state
+  }
+}
+
+function editingUser(state = {}, action) {
+  switch (action.type) {
+    case 'RECEIVE_EDITING_USER':
+      return action.editingUser
     default:
       return state
   }
@@ -46,8 +52,9 @@ const rootReducer = combineReducers({
   memos,
   isFetching,
   updatingMemo,
-  auth,
-  form: formReducer
+  form: formReducer,
+  users,
+  editingUser
 })
 
 export default rootReducer

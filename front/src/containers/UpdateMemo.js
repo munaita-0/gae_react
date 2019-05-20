@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { memoActions } from '../actions/index'
 import 'antd/dist/antd.css'
 import MemoForm from '../components/MemoForm'
+import { Typography } from 'antd'
+const { Title } = Typography
 
 class UpdateMemo extends Component {
   constructor(props) {
@@ -18,7 +20,8 @@ class UpdateMemo extends Component {
         if (err.response.status === 401) {
           this.props.history.push('/log_in')
         } else {
-          // TODO 例外処理
+          console.log(err)
+          throw err
         }
       })
   }
@@ -31,7 +34,8 @@ class UpdateMemo extends Component {
         if (err.response.status === 401) {
           this.props.history.push('/log_in')
         } else {
-          // TODO 例外処理
+          console.log(err)
+          throw err
         }
       })
   }
@@ -41,6 +45,7 @@ class UpdateMemo extends Component {
 
     return (
       <div>
+        <Title>EDIT MEMO</Title>
         <MemoForm
           onSubmit={this.handleSubmit}
           initialValues={updatingMemo}

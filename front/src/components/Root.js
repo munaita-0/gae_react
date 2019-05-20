@@ -4,6 +4,7 @@ import ListMemo from '../containers/ListMemo'
 import CreateMemo from '../containers/CreateMemo'
 import UpdateMemo from '../containers/UpdateMemo'
 import CreateUser from '../containers/CreateUser'
+import ListUser from '../containers/ListUser'
 import EditUser from '../containers/EditUser'
 import Login from '../containers/Login'
 import Logout from '../containers/Logout'
@@ -30,7 +31,7 @@ const Root = ({ store }) => (
           <Menu.Item key='1'><NavLink to='/'>Home</NavLink></Menu.Item>
           <Menu.Item key='2'><NavLink to='/sign_up'>Sign up</NavLink></Menu.Item>
           <Menu.Item key='3'><NavLink to='/log_in'>Log in</NavLink></Menu.Item>
-          <Menu.Item key='4'><NavLink to='/account'>Account</NavLink></Menu.Item>
+          <Menu.Item key='4'><NavLink to='/account_list'>AccountList</NavLink></Menu.Item>
           <Menu.Item key='5'><NavLink to='/sign_out'>Sign out</NavLink></Menu.Item>
           <Menu.Item key='6'><LoginMenu /></Menu.Item>
         </Menu>
@@ -42,8 +43,9 @@ const Root = ({ store }) => (
         <Route path="/update/:id" component={UpdateMemo} />
         <Route path="/sign_up" component={CreateUser} />
         <Route path="/log_in" component={Login} />
-        <Route path="/account" component={EditUser} />
         <Route path="/sign_out" component={Logout} />
+        <Route path="/account_list" component={ListUser} />
+        <Route path="/account_update/:id" component={EditUser} />
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>

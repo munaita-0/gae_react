@@ -5,6 +5,8 @@ import {
 } from '../actions/index'
 import 'antd/dist/antd.css'
 import LogoutForm from '../components/LogoutForm'
+import { Typography } from 'antd'
+const { Title } = Typography
 
 class Logout extends Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class Logout extends Component {
   render() {
     return (
       <div>
+        <Title>SIGN OUT</Title>
         <LogoutForm onSubmit={this.handleSubmit} />
       </div>
     )

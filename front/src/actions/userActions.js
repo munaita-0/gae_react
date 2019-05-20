@@ -20,33 +20,56 @@ export function login(idpass) {
     return axios.post(`${Configs.host}/auth/sign_in`, {
       email: idpass.email,
       password: idpass.password,
-    }).then(response => dispatch(receiveLogin(response.headers)))
-  }
-}
-
-export function receiveLogin(json) {
-  return {
-    type: 'RECEIVE_LOGIN',
-    auth: json,
+    }).then(response => {
+      document.cookie = `uid=${response.headers.uid}`
+      document.cookie = `client=${response.headers.client}`
+      document.cookie = `access-token=${response.headers['access-token']}`
+    }).catch(err => {
+      // 例外処理
+      throw err
+    })
   }
 }
 
 export function logout() {
   return dispatch => {
     return axios.delete(
-      `${Configs.host}/auth/sign_out` 
+      `${Configs.host}/auth/sign_out`,
+      Cookie.getHeaders()
     ).then(response => dispatch(function(e){
       document.cookie = `uid=`
       document.cookie = `client=`
       document.cookie = `access-token=`
-    }))
+    })).catch(err => {
+      throw err
+      // 例外処理
+    })
   }
 }
 
-export function fetchUser() {
+export function receiveUsers(json) {
+  return {
+    type: 'RECEIVE_USERS',
+    users: json.map(v => {return v}),
+  }
+}
+
+export function fetchListUsers() {
+  return dispatch => {
+    return axios.get(`${Configs.host}/users`, Cookie.getHeaders())
+      .then(response => dispatch(receiveUsers(response.data)))
+      .catch((err) => {
+        console.log("Error in response");
+        console.log(err.response.status);
+        throw err;
+      })
+  }
+}
+
+export function fetchUser(id) {
   return dispatch => {
     return axios.get(
-      `${Configs.host}/auth/password/edit`,
+      `${Configs.host}/users/${id}`,
       Cookie.getHeaders()
     ).then(response => dispatch(receiveEditingUser(response.data)))
   }
@@ -55,11 +78,11 @@ export function fetchUser() {
 export function receiveEditingUser(json) {
   return {
     type: 'RECEIVE_EDITING_USER',
-    updatingMemo: json,
+    editingUser: json,
   }
 }
 
-export function editUser(user, auth) {
+export function editUser(user) {
   return dispatch => {
     return axios.put(
       `${Configs.host}/auth`,

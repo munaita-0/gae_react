@@ -5,6 +5,8 @@ import {
 } from '../actions/index'
 import 'antd/dist/antd.css'
 import LoginForm from '../components/LoginForm'
+import { Typography } from 'antd'
+const { Title } = Typography
 
 class Login extends Component {
   constructor(props) {
@@ -13,7 +15,6 @@ class Login extends Component {
   }
 
   handleSubmit(e) {
-    console.log(e)
     const { dispatch } = this.props
     dispatch(login(e)).then(e => {
       this.props.history.push('/')
@@ -25,6 +26,7 @@ class Login extends Component {
   render() {
     return (
       <div>
+        <Title>LOG IN</Title>
         <LoginForm onSubmit={this.handleSubmit} />
       </div>
     )

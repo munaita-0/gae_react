@@ -6,6 +6,8 @@ import {
 import 'antd/dist/antd.css'
 import UserForm from '../components/UserForm'
 import { message } from 'antd';
+import { Typography } from 'antd'
+const { Title } = Typography
 
 class CreateUser extends Component {
   constructor(props) {
@@ -23,6 +25,7 @@ class CreateUser extends Component {
   render() {
     return (
       <div>
+        <Title>SIGN UP</Title>
         <UserForm onSubmit={this.handleSubmit} />
       </div>
     )
