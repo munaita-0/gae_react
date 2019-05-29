@@ -3,17 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchListUsers } from '../actions/index'
 import Users from '../components/Users'
-import { Button } from 'antd'
 import 'antd/dist/antd.css'
-import { NavLink } from 'react-router-dom'
 import { Typography } from 'antd'
 const { Title } = Typography
 
 class ListUser extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(fetchListUsers())
@@ -25,8 +19,7 @@ class ListUser extends Component {
           throw err
         }
       })
-  }
-
+  } 
   render() {
     const { users, isFetching } = this.props
 

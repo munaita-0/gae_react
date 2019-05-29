@@ -37,9 +37,7 @@ export function logout() {
       `${Configs.host}/auth/sign_out`,
       Cookie.getHeaders()
     ).then(response => dispatch(function(e){
-      document.cookie = `uid=`
-      document.cookie = `client=`
-      document.cookie = `access-token=`
+      Cookie.clear();
     })).catch(err => {
       throw err
       // 例外処理
@@ -61,6 +59,7 @@ export function fetchListUsers() {
       .catch((err) => {
         console.log("Error in response");
         console.log(err.response.status);
+        Cookie.clear();
         throw err;
       })
   }

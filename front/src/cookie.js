@@ -25,4 +25,10 @@ export class Cookie {
       }
     }
   }
+
+  static clear() {
+    document.cookie = `uid=`
+    document.cookie = `client=`
+    document.cookie = `access-token=`
+  }
 }
