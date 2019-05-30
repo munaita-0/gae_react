@@ -1,14 +1,16 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import ListMemo from '../containers/ListMemo'
-import CreateMemo from '../containers/CreateMemo'
-import UpdateMemo from '../containers/UpdateMemo'
-import CreateUser from '../containers/CreateUser'
-import ListUser from '../containers/ListUser'
-import EditUser from '../containers/EditUser'
-import Login from '../containers/Login'
-import Logout from '../containers/Logout'
-import LoginMenu from '../components/LoginMenu'
+import {
+  ListMemo,
+  CreateMemo,
+  UpdateMemo,
+  CreateUser,
+  ListUser,
+  EditUser,
+  Login,
+  Logout,
+} from '../containers/index'
+import { LoginMenu } from '../components/index'
 import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './History'

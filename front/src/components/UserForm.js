@@ -51,7 +51,8 @@ let UserForm = props => {
 
 UserForm = reduxForm({
   form: 'user',
-  validate
+  validate,
+  enableReinitialize: true
 })(UserForm)
 
 export default UserForm

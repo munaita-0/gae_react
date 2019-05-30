@@ -46,7 +46,8 @@ let MemoForm = props => {
 
 MemoForm = reduxForm({
   form: 'memo',
-  validate
+  validate,
+  enableReinitialize: true
 })(MemoForm)
 
 export default MemoForm

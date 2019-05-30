@@ -38,6 +38,10 @@ class EditUser extends Component {
   render() {
     const { editingUser } = this.props
 
+    console.log('========')
+    console.log(editingUser)
+    console.log('========')
+
     return (
       <div>
         <Title>EDIT USER</Title>
