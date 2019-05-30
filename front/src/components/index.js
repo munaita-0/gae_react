@@ -1,5 +1,5 @@
 export { default as History } from './History'
-export { default as LoginForm } from './LoginForm'
+export { default as WrappedLoginForm } from './LoginForm'
 export { default as LogoutForm } from './LogoutForm'
 export { default as MemoForm } from './MemoForm'
 export { default as Memos } from './Memos'

@@ -4,7 +4,7 @@ import {
   login
 } from '../actions/index'
 import 'antd/dist/antd.css'
-import LoginForm from '../components/LoginForm'
+import { WrappedLoginForm } from '../components/index'
 import { Typography } from 'antd'
 const { Title } = Typography
 
@@ -27,7 +27,7 @@ class Login extends Component {
     return (
       <div>
         <Title>LOG IN</Title>
-        <LoginForm onSubmit={this.handleSubmit} />
+        <WrappedLoginForm handleLogin={this.handleSubmit} />
       </div>
     )
   }

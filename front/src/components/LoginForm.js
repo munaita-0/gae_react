@@ -1,50 +1,29 @@
-import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import React, { useState } from 'react'
 import { Form, Button, Input } from 'antd'
 
-const validate = values => {
-  const errors = {}
-
-  if (!values.email) {
-    errors.description = 'Required'
-  }
-
-  if (!values.password) {
-    errors.password = 'Required'
-  }
-
-  return errors
-}
-
-const renderField = ({ input, label, type, meta}) => {
-  const hasError = meta.touched && meta.invalid;
-
-  return (
-    <Form.Item
-      label={label}
-      validateStatus={hasError ? "error" : "success"}
-      help={hasError && meta.error}
-    >
-      <div>
-        <Input {...input} placeholder={label} type={type}/>
-      </div>
-    </Form.Item>
-  )
-}
-
-
 let LoginForm = props => {
-  const { handleSubmit, invalid } = props
-  return <Form onSubmit={handleSubmit}>
-           <Field name="email" component={renderField} type="text" label="Email" />
-           <Field name="password" component={renderField} type="text" label="Password" />
+  const { handleLogin, invalid } = props
+  const [email, setEmail] = useState('');
+  const handleChangeEmail = (event) => { setEmail(event.target.value); }
+  const [password, setPassword] = useState('');
+  const handleChangePassword = (event) => { setPassword(event.target.value); }
+
+  const handleForm = e => {
+    e.preventDefault();
+    handleLogin({ email: email, password: password })
+  }
+
+  return <Form onSubmit={handleForm}>
+           <Form.Item label="Email">
+             <Input name="email" type="text" label="Email" value={email} onChange={handleChangeEmail} />
+           </Form.Item>
+           <Form.Item label="Password">
+             <Input name="password" type="password" label="Password" value={password} onChange={handleChangePassword} />
+           </Form.Item>
            <Button type="primary" htmlType="submit" disabled={invalid} >Login</Button>
          </Form>
 }
 
-LoginForm = reduxForm({
-  form: 'login',
-  validate
-})(LoginForm)
+const WrappedLoginForm = Form.create({ name: 'login' })(LoginForm);
 
-export default LoginForm
+export default WrappedLoginForm
