@@ -1,58 +1,43 @@
-import React from 'react'
-import { Field, reduxForm } from 'redux-form'
 import { Form, Button, Input } from 'antd'
-
-const validate = values => {
-  const errors = {}
-
-  if (!values.name) {
-    errors.name = 'Required'
-  } else if (values.name.length < 2) {
-    errors.name = 'Must be more than 2 characters'
-  }
-
-  if (!values.email) {
-    errors.description = 'Required'
-  }
-
-  if (!values.password) {
-    errors.password = 'Required'
-  }
-
-  return errors
-}
-
-const renderField = ({ input, label, type, meta}) => {
-  const hasError = meta.touched && meta.invalid;
-
-  return (
-    <Form.Item
-      label={label}
-      validateStatus={hasError ? "error" : "success"}
-      help={hasError && meta.error}
-    >
-      <div>
-        <Input {...input} placeholder={label} type={type}/>
-      </div>
-    </Form.Item>
-  )
-}
-
+import React, { useState } from 'react'
 
 let UserForm = props => {
-  const { handleSubmit, invalid } = props
-  return <Form onSubmit={handleSubmit}>
-           <Field name="name" component={renderField} type="text" label="Name" />
-           <Field name="email" component={renderField} type="text" label="Email" />
-           <Field name="password" component={renderField} type="text" label="Password" />
+  const { handleSubmit, invalid, initialValues } = props
+
+  let initName = ''
+  let initEmail = ''
+  let initPassword = ''
+
+  if (initialValues) {
+    initName = initialValues.name
+    initEmail = initialValues.email
+    initPassword = initialValues.password
+  }
+
+  const [name, setName] = useState(initName);
+  const handleChangeName = (event) => { setName(event.target.value); }
+  const [email, setEmail] = useState(initEmail);
+  const handleChangeEmail = (event) => { setEmail(event.target.value); }
+  const [password, setPassword] = useState(initPassword);
+  const handleChangePassword = (event) => { setPassword(event.target.value); }
+
+  const handleSubmitForm = (e) => {
+    e.preventDefault(e)
+    handleSubmit({ name: name, email: email, password: password })
+  }
+
+  return <Form onSubmit={handleSubmitForm}>
+           <Form.Item label="Name">
+             <Input name="name" type="text" label="Name" value={name} onChange={handleChangeName}/>
+           </Form.Item>
+           <Form.Item label="Email">
+             <Input name="name" type="text" label="Email" value={email} onChange={handleChangeEmail}/>
+           </Form.Item>
+           <Form.Item label="Password">
+             <Input name="password" type="password" label="Password" value={password} onChange={handleChangePassword} />
+           </Form.Item>
            <Button type="primary" htmlType="submit" disabled={invalid} >submit</Button>
          </Form>
 }
-
-UserForm = reduxForm({
-  form: 'user',
-  validate,
-  enableReinitialize: true
-})(UserForm)
 
 export default UserForm

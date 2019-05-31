@@ -1,57 +1,52 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { fetchListUsers } from '../actions/index'
 import Users from '../components/Users'
 import 'antd/dist/antd.css'
 import { Typography } from 'antd'
+import axios from 'axios'
+import {Configs} from '../config'
+import {Cookie} from '../cookie'
 const { Title } = Typography
 
-class ListUser extends Component {
+// https://github.com/arman37/CRUD_ReactJS/blob/master/app/CRUDContainer.js
+
+export default class ListUser extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      users: {},
+      isFetching: false
+    }
+  }
+
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(fetchListUsers())
+    this.setState({isFetching: true})
+
+    axios.get(`${Configs.host}/users`, Cookie.getHeaders())
+      .then(response => this.setState({
+        isFetching: false,
+        users: response.data
+      }))
       .catch((err) => {
-        if (err.response.status === 401) {
-          this.props.history.push('/log_in')
-        } else {
-          console.log(err)
-          throw err
-        }
+        console.log("Error in response");
+        console.log(err.response.status);
+        Cookie.clear();
+        throw err;
       })
   } 
-  render() {
-    const { users, isFetching } = this.props
 
+  render() {
+    const { users, isFetching } = this.state
     return (
       <div>
-        <Title>ACCOUNT LIST</Title>
-        {isFetching && users.length === 0 && <h2>Loading...</h2>}
-        {!isFetching && users.length === 0 && <h2>Enpty.</h2>}
-        {users.length > 0 && (
-          <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-            <Users users={users} />
-          </div>
-        )}
+      <Title>ACCOUNT LIST</Title>
+      {isFetching && users.length === 0 && <h2>Loading...</h2>}
+      {!isFetching && users.length === 0 && <h2>Enpty.</h2>}
+      {users.length > 0 && (
+        <div style={{ opacity: isFetching ? 0.5 : 1 }}>
+        <Users users={users} />
+        </div>
+      )}
       </div>
     )
   }
 }
-
-ListUser.propTypes = {
-  users: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired
-}
-
-function mapStateToProps(state) {
-  let { isFetching, users } = state || { isFetching: true, users: [] }
-  users = !users ? [] : users
-
-  return {
-    users,
-    isFetching,
-  }
-}
-
-export default connect(mapStateToProps) (ListUser)
