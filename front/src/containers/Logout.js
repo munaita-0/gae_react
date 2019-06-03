@@ -16,6 +16,7 @@ class Logout extends Component {
 
   handleSubmit(e) {
     const { dispatch } = this.props
+    e.preventDefault();
     dispatch(logout()).then(e => {
       this.props.history.push('/')
       // header周りの情報更新のためログインあとにreloadする
@@ -27,7 +28,7 @@ class Logout extends Component {
     return (
       <div>
         <Title>SIGN OUT</Title>
-        <LogoutForm onSubmit={this.handleSubmit} />
+        <LogoutForm handleSubmit={this.handleSubmit} />
       </div>
     )
   }
