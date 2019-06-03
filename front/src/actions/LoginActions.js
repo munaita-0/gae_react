@@ -2,9 +2,6 @@ import {Configs} from '../config'
 import {Cookie} from '../cookie'
 import axios from 'axios'
 
-export const userActions = {
-}
-
 export function login(idpass) {
   return dispatch => {
     return axios.post(`${Configs.host}/auth/sign_in`, {

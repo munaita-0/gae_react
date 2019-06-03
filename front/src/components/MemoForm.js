@@ -1,9 +1,8 @@
 import React from 'react'
 import { Form, Button, Input } from 'antd'
 
-// TODO 編集の実装
 let MemoFormBase = props => {
-  const { handleSubmit } = props
+  const { handleSubmit, initVals } = props
   const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = props.form;
 
   const hasErrors = fieldsError => {
@@ -28,14 +27,20 @@ let MemoFormBase = props => {
            <Form.Item label="Name" validateStatus={nameError ? 'error' : ''} help={nameError || ''}>
              {getFieldDecorator(
                'name', 
-               { rules: [ { required: true, message: 'Please input your email!' }, ]}
+               {
+                 initialValue: initVals ? initVals.name : '',
+                 rules: [ { required: true, message: 'Please input your email!' }, ]
+               }
               )(<Input placeholder="Name" />)
              }
            </Form.Item>
            <Form.Item label="Description" validateStatus={descriptionError ? 'error' : ''} help={descriptionError || ''}>
              {getFieldDecorator(
                'description', 
-               { rules: [ { required: true, message: 'Please input your description!' }, ]}
+               {
+                 initialValue: initVals ? initVals.description : '',
+                 rules: [ { required: true, message: 'Please input your description!' }, ]
+               }
               )(<Input placeholder="Description" />)
              }
            </Form.Item>

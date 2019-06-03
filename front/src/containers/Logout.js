@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {
-  logout
-} from '../actions/index'
+import { logout } from '../actions/LoginActions'
 import 'antd/dist/antd.css'
 import LogoutForm from '../components/LogoutForm'
 import { Typography } from 'antd'

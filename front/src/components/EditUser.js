@@ -58,7 +58,7 @@ export default class EditUser extends Component {
         <Title>EDIT USER</Title>
         <UserForm
           handleSubmit={this.handleSubmit}
-          initialValues={this.state.editingUser}
+          initVals={this.state.editingUser}
         />
       </div>
     )

@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {
-  login
-} from '../actions/index'
+import { login } from '../actions/LoginActions'
 import 'antd/dist/antd.css'
 import { WrappedLoginForm } from '../components/index'
 import { Typography } from 'antd'

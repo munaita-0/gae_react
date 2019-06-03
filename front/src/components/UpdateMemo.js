@@ -54,7 +54,7 @@ export default class UpdateMemo extends Component {
         <Title>EDIT MEMO</Title>
         <MemoForm
           handleSubmit={this.handleSubmit}
-          initialValues={this.state.updatingMemo}
+          initVals={this.state.updatingMemo}
         />
       </div>
     )

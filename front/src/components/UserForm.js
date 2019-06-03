@@ -1,9 +1,8 @@
 import { Form, Button, Input } from 'antd'
 import React from 'react'
 
-// TODO 編集の実装
 let UserFormBase = props => {
-  const { handleSubmit, initialValues } = props
+  const { handleSubmit, initVals } = props
   const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = props.form;
 
   const handleSubmitForm = e => {
@@ -29,27 +28,36 @@ let UserFormBase = props => {
            <Form.Item label="Name" validateStatus={nameError ? 'error' : ''} help={nameError || ''}>
              {getFieldDecorator(
                'name', 
-               { rules: [ { required: true, message: 'Please input your email!' }, ]}
+               {
+                 initialValue: initVals ? initVals.name : '',
+                 rules: [ { required: true, message: 'Please input your email!' }]
+               }
               )(<Input placeholder="Name" />)
              }
            </Form.Item>
            <Form.Item label="Email" validateStatus={emailError ? 'error' : ''} help={emailError || ''}>
              {getFieldDecorator(
                'email', 
-               { rules: [
-                 { required: true, message: 'Please input your email!' },
-                 { type: 'email', message: 'The input is not valid E-mail!' },
-               ]}
+               { 
+                 initialValue: initVals ? initVals.email : '',
+                 rules: [
+                   { required: true, message: 'Please input your email!' },
+                   { type: 'email', message: 'The input is not valid E-mail!' },
+                 ]
+               }
               )(<Input placeholder="Email" />)
              }
            </Form.Item>
            <Form.Item label="Password" validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
              {getFieldDecorator(
                'password', 
-               { rules: [
-                 { required: true, message: 'Please input your password!' },
-                 { min: 3, message: 'more than three letters' },
-               ]}
+               {
+                 initialValue: initVals ? initVals.password : '',
+                 rules: [
+                   { required: true, message: 'Please input your password!' },
+                   { min: 3, message: 'more than three letters' },
+                 ]
+               }
               )(<Input type="password" placeholder="Password" />)
              }
            </Form.Item>
