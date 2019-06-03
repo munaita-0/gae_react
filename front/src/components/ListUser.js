@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Users from '../components/Users'
+import Users from './Users'
 import 'antd/dist/antd.css'
 import { Typography } from 'antd'
 import axios from 'axios'

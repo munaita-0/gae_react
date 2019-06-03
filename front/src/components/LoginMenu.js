@@ -2,6 +2,7 @@ import { Component } from 'react'
 import 'antd/dist/antd.css'
 import { Cookie } from '../cookie'
 
+// container化する
 export default class LoginMenu extends Component {
   render() {
     const cookie = Cookie.cookieMap()

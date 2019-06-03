@@ -4,13 +4,15 @@ import {
   ListMemo,
   CreateMemo,
   UpdateMemo,
-  CreateUser,
-  ListUser,
-  EditUser,
   Login,
   Logout,
 } from '../containers/index'
-import { LoginMenu } from '../components/index'
+import {
+  LoginMenu,
+  ListUser,
+  CreateUser,
+  EditUser,
+} from '../components/index'
 import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './History'

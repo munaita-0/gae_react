@@ -1,7 +1,4 @@
 export { default as CreateMemo } from './CreateMemo'
-export { default as CreateUser } from './CreateUser'
-export { default as ListUser } from './ListUser'
-export { default as EditUser } from './EditUser'
 export { default as ListMemo } from './ListMemo'
 export { default as Login } from './Login'
 export { default as Logout } from './Logout'
