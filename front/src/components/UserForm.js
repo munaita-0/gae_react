@@ -1,43 +1,62 @@
 import { Form, Button, Input } from 'antd'
-import React, { useState } from 'react'
+import React from 'react'
 
-let UserForm = props => {
-  const { handleSubmit, invalid, initialValues } = props
+// TODO 編集の実装
+let UserFormBase = props => {
+  const { handleSubmit, initialValues } = props
+  const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = props.form;
 
-  let initName = ''
-  let initEmail = ''
-  let initPassword = ''
-
-  if (initialValues) {
-    initName = initialValues.name
-    initEmail = initialValues.email
-    initPassword = initialValues.password
-  }
-
-  const [name, setName] = useState(initName);
-  const handleChangeName = (event) => { setName(event.target.value); }
-  const [email, setEmail] = useState(initEmail);
-  const handleChangeEmail = (event) => { setEmail(event.target.value); }
-  const [password, setPassword] = useState(initPassword);
-  const handleChangePassword = (event) => { setPassword(event.target.value); }
-
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = e => {
     e.preventDefault(e)
-    handleSubmit({ name: name, email: email, password: password })
+
+    props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+        handleSubmit(values)
+      }
+    });
   }
+
+  const hasErrors = fieldsError => {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
+
+  const nameError = isFieldTouched('name') && getFieldError('name');
+  const emailError = isFieldTouched('email') && getFieldError('email');
+  const passwordError = isFieldTouched('password') && getFieldError('password');
 
   return <Form onSubmit={handleSubmitForm}>
-           <Form.Item label="Name">
-             <Input name="name" type="text" label="Name" value={name} onChange={handleChangeName}/>
+           <Form.Item label="Name" validateStatus={nameError ? 'error' : ''} help={nameError || ''}>
+             {getFieldDecorator(
+               'name', 
+               { rules: [ { required: true, message: 'Please input your email!' }, ]}
+              )(<Input placeholder="Name" />)
+             }
            </Form.Item>
-           <Form.Item label="Email">
-             <Input name="name" type="text" label="Email" value={email} onChange={handleChangeEmail}/>
+           <Form.Item label="Email" validateStatus={emailError ? 'error' : ''} help={emailError || ''}>
+             {getFieldDecorator(
+               'email', 
+               { rules: [
+                 { required: true, message: 'Please input your email!' },
+                 { type: 'email', message: 'The input is not valid E-mail!' },
+               ]}
+              )(<Input placeholder="Email" />)
+             }
            </Form.Item>
-           <Form.Item label="Password">
-             <Input name="password" type="password" label="Password" value={password} onChange={handleChangePassword} />
+           <Form.Item label="Password" validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
+             {getFieldDecorator(
+               'password', 
+               { rules: [
+                 { required: true, message: 'Please input your password!' },
+                 { min: 3, message: 'more than three letters' },
+               ]}
+              )(<Input type="password" placeholder="Password" />)
+             }
            </Form.Item>
-           <Button type="primary" htmlType="submit" disabled={invalid} >submit</Button>
+           <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())} >Login</Button>
          </Form>
 }
+
+const UserForm = Form.create({ name: 'user' })(UserFormBase);
 
 export default UserForm

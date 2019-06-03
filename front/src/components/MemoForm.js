@@ -2,52 +2,47 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Form, Button, Input } from 'antd'
 
-const validate = values => {
-  const errors = {}
+// TODO 編集の実装
+let MemoFormBase = props => {
+  const { handleSubmit } = props
+  const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = props.form;
 
-  if (!values.name) {
-    errors.name = 'Required'
-  } else if (values.name.length < 2) {
-    errors.name = 'Must be more than 2 characters'
+  const hasErrors = fieldsError => {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
   }
 
-  if (!values.description) {
-    errors.description = 'Required'
+  const handleSubmitForm = e => {
+    e.preventDefault(e)
+
+    props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+        handleSubmit(values)
+      }
+    });
   }
 
-  return errors
-}
+  const nameError = isFieldTouched('name') && getFieldError('name');
+  const descriptionError = isFieldTouched('description') && getFieldError('description');
 
-const renderField = ({ input, label, type, meta}) => {
-  const hasError = meta.touched && meta.invalid;
-
-  return (
-    <Form.Item
-      label={label}
-      validateStatus={hasError ? "error" : "success"}
-      help={hasError && meta.error}
-    >
-      <div>
-        <Input {...input} placeholder={label} type={type}/>
-      </div>
-    </Form.Item>
-  )
-}
-
-
-let MemoForm = props => {
-  const { handleSubmit, invalid } = props
-  return <Form onSubmit={handleSubmit}>
-           <Field name="name" component={renderField} type="text" label="Name" />
-           <Field name="description" component={renderField} type="text" label="Description" />
-           <Button type="primary" htmlType="submit" disabled={invalid} >Create</Button>
+  return <Form onSubmit={handleSubmitForm}>
+           <Form.Item label="Name" validateStatus={nameError ? 'error' : ''} help={nameError || ''}>
+             {getFieldDecorator(
+               'name', 
+               { rules: [ { required: true, message: 'Please input your email!' }, ]}
+              )(<Input placeholder="Name" />)
+             }
+           </Form.Item>
+           <Form.Item label="Description" validateStatus={descriptionError ? 'error' : ''} help={descriptionError || ''}>
+             {getFieldDecorator(
+               'description', 
+               { rules: [ { required: true, message: 'Please input your description!' }, ]}
+              )(<Input placeholder="Description" />)
+             }
+           </Form.Item>
+           <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())} >Login</Button>
          </Form>
 }
 
-MemoForm = reduxForm({
-  form: 'memo',
-  validate,
-  enableReinitialize: true
-})(MemoForm)
-
+const MemoForm = Form.create({ name: 'memo' })(MemoFormBase);
 export default MemoForm

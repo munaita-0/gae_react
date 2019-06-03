@@ -22,7 +22,7 @@ class CreateMemo extends Component {
   render() {
     return (
       <div>
-        <MemoForm onSubmit={this.handleSubmit} />
+        <MemoForm handleSubmit={this.handleSubmit} />
       </div>
     )
   }
