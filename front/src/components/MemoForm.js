@@ -1,5 +1,4 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
 import { Form, Button, Input } from 'antd'
 
 // TODO 編集の実装

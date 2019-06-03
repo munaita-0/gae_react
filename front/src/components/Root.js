@@ -1,9 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import {
-  ListMemo,
-  CreateMemo,
-  UpdateMemo,
   Login,
   Logout,
 } from '../containers/index'
@@ -11,7 +8,10 @@ import {
   LoginMenu,
   ListUser,
   CreateUser,
+  ListMemo,
   EditUser,
+  CreateMemo,
+  UpdateMemo,
 } from '../components/index'
 import { BrowserRouter, Route, NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'

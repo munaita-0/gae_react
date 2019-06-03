@@ -1,24 +1,36 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { memoActions } from '../actions/index'
 import Memos from '../components/Memos'
 import { Button } from 'antd'
 import 'antd/dist/antd.css'
 import { NavLink } from 'react-router-dom'
+import {Configs} from '../config'
+import {Cookie} from '../cookie'
+import axios from 'axios'
 import { Typography } from 'antd'
 const { Title } = Typography
 
-class ListMemo extends Component {
+export default class ListMemo extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      memos: {},
+      isFetching: false
+    }
     this.handleDelete = this.handleDelete.bind(this);
+    this.fetchMemos = this.fetchMemos.bind(this);
   }
 
-  componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(memoActions.fetchListMemos())
+  fetchMemos() {
+    this.setState({isFetching: true})
+
+    return axios.get(`${Configs.host}/memos`, Cookie.getHeaders())
+      .then(response => this.setState({
+        isFetching: false,
+        memos: response.data
+      }))
       .catch((err) => {
+        console.log("Error in response");
+        console.log(err.response.status);
         if (err.response.status === 401) {
           this.props.history.push('/log_in')
         } else {
@@ -28,10 +40,16 @@ class ListMemo extends Component {
       })
   }
 
+  componentDidMount() {
+    this.fetchMemos()
+  }
+
   handleDelete(e) {
-    const { dispatch } = this.props
-    dispatch(memoActions.deleteMemo(e.id))
+    axios.delete(`${Configs.host}/memos/${e.id}`, Cookie.getHeaders())
+      .then(response => { this.fetchMemos() })
       .catch((err) => {
+        console.log("Error in response");
+        console.log(err.response.status);
         if (err.response.status === 401) {
           this.props.history.push('/log_in')
         } else {
@@ -42,7 +60,7 @@ class ListMemo extends Component {
   }
 
   render() {
-    const { memos, isFetching } = this.props
+    const { memos, isFetching } = this.state
 
     return (
       <div>
@@ -59,21 +77,3 @@ class ListMemo extends Component {
     )
   }
 }
-
-ListMemo.propTypes = {
-  memos: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired
-}
-
-function mapStateToProps(state) {
-  let { isFetching, memos } = state || { isFetching: true, memos: [] }
-  memos = !memos ? [] : memos
-
-  return {
-    memos,
-    isFetching,
-  }
-}
-
-export default connect(mapStateToProps) (ListMemo)
