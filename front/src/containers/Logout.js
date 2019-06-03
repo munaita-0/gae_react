@@ -8,30 +8,22 @@ import LogoutForm from '../components/LogoutForm'
 import { Typography } from 'antd'
 const { Title } = Typography
 
-class Logout extends Component {
-  constructor(props) {
-    super(props)
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(e) {
-    const { dispatch } = this.props
+const Logout = props => {
+  const handleSubmit = e => {
     e.preventDefault();
-    dispatch(logout()).then(e => {
-      this.props.history.push('/')
+    props.dispatch(logout()).then(e => {
+      props.history.push('/')
       // header周りの情報更新のためログインあとにreloadする
       window.location.reload()
     })
   }
 
-  render() {
-    return (
-      <div>
-        <Title>SIGN OUT</Title>
-        <LogoutForm handleSubmit={this.handleSubmit} />
-      </div>
-    )
-  }
+  return (
+    <div>
+    <Title>SIGN OUT</Title>
+    <LogoutForm handleSubmit={handleSubmit} />
+    </div>
+  )
 }
 
 export default connect() (Logout)
