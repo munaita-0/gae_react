@@ -1,3 +1,7 @@
+import {Configs} from './config'
+import axios from 'axios'
+
+// TODO instance化したほうがよさそう
 export class Cookie {
 
   static cookieMap() {
@@ -30,5 +34,25 @@ export class Cookie {
     document.cookie = `uid=`
     document.cookie = `client=`
     document.cookie = `access-token=`
+  }
+
+  static isExist() {
+    const map = Cookie.cookieMap()
+    return (map['uid'] && map['client'] && map['access-token'])
+  }
+
+  static activeCheck() {
+    return axios.get(
+      `${Configs.host}/auth/validate_token`,
+      Cookie.getHeaders()
+    ).then(response => {
+      console.log('==auth ok==')
+      return true
+    }).catch(err => {
+      // 例外処理
+      console.log('==auth error==')
+      console.log(err)
+      return false
+    })
   }
 }

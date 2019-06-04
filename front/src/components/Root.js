@@ -3,9 +3,9 @@ import { Provider } from 'react-redux'
 import {
   Login,
   Logout,
+  LoginMenu,
 } from '../containers/index'
 import {
-  LoginMenu,
   ListUser,
   CreateUser,
   ListMemo,

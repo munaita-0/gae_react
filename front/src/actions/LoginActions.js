@@ -2,6 +2,9 @@ import {Configs} from '../config'
 import {Cookie} from '../cookie'
 import axios from 'axios'
 
+// actionを返す責務
+// dispatchなどはここでやる必要ない
+// ここではなにが起こったかを記述するだけ
 export function login(idpass) {
   return dispatch => {
     return axios.post(`${Configs.host}/auth/sign_in`, {
@@ -29,5 +32,13 @@ export function logout() {
       throw err
       // 例外処理
     })
+  }
+}
+
+export function loginStatus(bool) {
+  if (bool) {
+    return { type: 'LOGIN' }
+  } else {
+    return { type: 'LOGOUT' }
   }
 }
