@@ -1,18 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { logout } from '../actions/LoginActions'
 import 'antd/dist/antd.css'
 import LogoutForm from '../components/LogoutForm'
+import {Configs} from '../config'
+import {Cookie} from '../cookie'
+import axios from 'axios'
 import { Typography } from 'antd'
+import { loginStatus } from '../actions/LoginActions'
 const { Title } = Typography
 
-const Logout = props => {
+
+let Logout = props => {
+
   const handleSubmit = e => {
     e.preventDefault();
-    props.dispatch(logout()).then(e => {
+
+    axios.delete(
+      `${Configs.host}/auth/sign_out`,
+      Cookie.getHeaders()
+    ).then(response => {
+      Cookie.clear();
+      props.handleUpdateLogin(false);
       props.history.push('/')
-      // header周りの情報更新のためログインあとにreloadする
-      window.location.reload()
+    }).catch(err => {
+      console.log(err)
+      throw err
     })
   }
 
@@ -24,4 +36,20 @@ const Logout = props => {
   )
 }
 
-export default connect() (Logout)
+function mapStateToProps(state) {
+  let { login } = state
+  return { login }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleUpdateLogin: bool => {
+      dispatch(loginStatus(bool))
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+) (Logout)

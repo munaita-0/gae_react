@@ -49,6 +49,7 @@ export class Cookie {
       console.log('==auth ok==')
       return true
     }).catch(err => {
+      // TODO authタイムアウトでここに処理入るか確認
       // 例外処理
       console.log('==auth error==')
       console.log(err)
